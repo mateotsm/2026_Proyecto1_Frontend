@@ -170,6 +170,18 @@ export default function RegistrarActualizarProductoForm({
     fetchData();
   }, [producto]);
 
+  useEffect(() => {
+    if (!producto) {
+      const marcaNombre = selectedMarca?.denominacion || '';
+      const lineaNombre = lineaSeleccionada?.denominacion || '';
+      const presentacionValor = watch('presentacion') || '';
+      if (marcaNombre && lineaNombre && presentacionValor) {
+        const denominacionAuto = `${marcaNombre} ${lineaNombre} ${presentacionValor}`.trim();
+        setValue('denominacion', denominacionAuto);
+      }
+    }
+  }, [selectedMarca, lineaSeleccionada, watch('presentacion')]);
+
   const onSubmit = async (formData: FormValues) => {
     let response: ResponsePost;
 
@@ -323,6 +335,12 @@ export default function RegistrarActualizarProductoForm({
 
                     
                   </div>
+
+                  <FormInput
+                  name="presentacion"
+                  label="Presentación"
+                  placeholder="Ej: 1L, 2L, pack x6"
+                  />
 
                   <FormInput
                     name="codigoProveedor"

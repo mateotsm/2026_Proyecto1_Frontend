@@ -31,6 +31,7 @@ export interface FormValues {
   cantidadPorPack?: number;
   utilizaStockMinimo?: boolean;
   utilizaPack?: boolean;
+  presentacion?: string | null;
  /*  porcentajeOcasional: number;
   precioOcasional: number;
   porcentajeMayorista: number;
@@ -119,6 +120,7 @@ export const schema = (utilizaStockMinimo: boolean, utilizaPack: boolean, usaOfe
     }), */
     utilizaPack: yup.boolean().optional(),
     utilizaStockMinimo: yup.boolean().optional(),
+    presentacion: yup.string().optional().nullable(),
     /* porcentajeOcasional: yup
       .number()
       .typeError("El porcentaje ocasional es obligatorio.")
@@ -183,6 +185,7 @@ export const transformData = (producto: Producto): FormValues => {
     cantidadPorPack: producto.cantidadPorPack ?? null,
     utilizaStockMinimo: producto.utilizaStockMinimo,
     utilizaPack: producto.utilizaPack,
+    presentacion: producto.presentacion ?? null,
  //   cantidadOferta: producto.cantidadOferta ?? 0,
    /*  porcentajeOcasional: producto.porcentajeOcasional ?? 0,
     porcentajeMayorista: producto.porcentajeMayorista ?? 0,
