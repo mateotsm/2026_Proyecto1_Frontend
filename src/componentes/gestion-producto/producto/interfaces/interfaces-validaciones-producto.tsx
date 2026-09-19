@@ -64,13 +64,13 @@ export const schema = (utilizaStockMinimo: boolean, utilizaPack: boolean, usaOfe
     codigoReferencia: yup.string().optional().nullable(),
     codigoBarra: yup.string().optional().max(255, "Máximo 255 caracteres.").nullable(),
     stock: yup.number().optional().nullable(),
-    costo: yup.number().typeError("El costo debe ser un valor númerico").required("El costo es obligatorio").min(0,"El costo debe ser mayor o igual a 0"),
-    precio: yup.number().typeError("El precio debe ser un valor númerico").required("El precio es obligatorio").min(0,"El costo debe ser mayor o igual a 0").test("precio-mayor-o-igual-costo","El precio debe ser mayor o igual que el costo", function(value){
+    costo: yup.number().typeError("El costo debe ser un valor numérico").required("El costo es obligatorio").min(0.01, "El costo debe ser mayor a 0"),
+    precio: yup.number().typeError("El precio debe ser un valor numérico").required("El precio es obligatorio").min(0.01, "El precio debe ser mayor a 0").test("precio-mayor-o-igual-costo","El precio debe ser mayor o igual que el costo", function(value){
       const {costo} = this.parent;
       if (value==null || costo == null ) return true;
       return value>= costo;
     }),
-    porcentaje: yup.number().typeError("El porcentaje debe ser un valor númerico").min(0,"El porcentaje mínimo debe ser mayor o igual a 0").max(999, "El porcentaje máximo permitido es de 999").optional().nullable(),
+    porcentaje: yup.number().typeError("El porcentaje debe ser un valor numérico").min(0, "El margen no puede ser negativo").max(100, "El margen no puede superar el 100%").optional().nullable(),
     /* costoEnDolar: yup.boolean().optional().nullable(),
     costoDolar: yup.number().optional().nullable(),
     destacado: yup.boolean().optional().nullable(),
