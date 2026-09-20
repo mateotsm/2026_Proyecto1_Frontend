@@ -32,6 +32,7 @@ import { NotificacionModal } from "../../../NotificacionModal/modales/Notificaci
 import { ProductoNotificacion, EntidadTipo } from "../../../NotificacionModal/interfaces/notificacion.types";
 import { getRoles, getUsuarioId } from "../../../../utils/auth";
 import { puedeHacerAcciones } from "../domain/permisos-producto";
+import SuperLineaService from "../../super-linea/services/super-linea-service";
 
 
 export default function ConsultarProductos() {
@@ -90,6 +91,7 @@ export default function ConsultarProductos() {
     // Contexto de catálogos
   const {
     setLineas,
+    setSuperLineas,
     setMarcas,
     setProveedores,
   } = useCatalogosContext();
@@ -102,6 +104,7 @@ export default function ConsultarProductos() {
       denominacion: true,
       codigoProveedor: true,
       linea: true,
+      superLinea: true,
       marca: true,
       proveedor: true,
       conStock: true,
@@ -165,6 +168,19 @@ export default function ConsultarProductos() {
   useEffect(() => {
     fetchLineas();
   }, [valoresFiltros.denominacionLinea]);
+
+  const fetchSuperLineas = async () => {
+    try {
+      const res = await SuperLineaService.obtener({ skip: 0, take: 100 });
+      setSuperLineas(res.data ?? []);
+    } catch (err) {
+      console.error('Error al obtener superLíneas:', err);
+    }
+  };
+  
+  useEffect(() => {
+    fetchSuperLineas();
+  }, [valoresFiltros.denominacionSuperLinea]);
 
   const fetchMarcas = async () => {
     setError(null);
@@ -361,6 +377,7 @@ export default function ConsultarProductos() {
       codigoProveedor: valoresFiltros.codigoProveedor,
       codigoReferencia: valoresFiltros.codigoReferencia,
       lineaId: valoresFiltros.lineaId,
+      superLineaId: valoresFiltros.superLineaId,
       marcaId: valoresFiltros.marcaId,
       proveedorId: valoresFiltros.proveedorId,
       conStock: valoresFiltros.conStock,
