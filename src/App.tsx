@@ -21,6 +21,8 @@ import DashboardHome from "./pages/dashboard-home";
 import ListaPrecios from "./componentes/gestion-producto/precios/lista_precios/util/lista-precios";
 import ConsultarPersonal from "./componentes/gestion-organizacion/personal/utils/consultar-personal";
 
+import ConsultarSuperLinea from "./componentes/gestion-producto/super-linea/consultar-super-linea";
+
 function App() {
   return (
     <ThemeProvider>
@@ -42,6 +44,7 @@ function App() {
               </Route>
      
               <Route path="linea" element={<ConsultarLinea />} />
+              <Route path="super-linea" element={<ConsultarSuperLinea />} />
               <Route path="usuario" element={<GestionUsuario />} />
               <Route path="producto" element={<ConsultarProducto />} />
               <Route path="cliente" element={<ConsultarCliente />} />
