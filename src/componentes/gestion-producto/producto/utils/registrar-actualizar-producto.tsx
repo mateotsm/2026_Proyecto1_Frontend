@@ -182,6 +182,21 @@ export default function RegistrarActualizarProductoForm({
     }
   }, [selectedMarca, lineaSeleccionada, watch('presentacion')]);
 
+  useEffect(() => {
+    const cargarOpciones = async () => {
+      try {
+        const lineasRes = await ProductoService.obtenerTotales({ denominacion: '' }, 'lineas');
+        if (lineasRes) setLineas(lineasRes.data);
+
+        const marcasRes = await ProductoService.obtenerTotales({ denominacion: '' }, 'marcas');
+        if (marcasRes) setMarcas(marcasRes.data);
+      } catch (error) {
+        console.error('Error al cargar opciones:', error);
+      }
+    };
+    cargarOpciones();
+  }, []);
+
   const onSubmit = async (formData: FormValues) => {
     let response: ResponsePost;
 
