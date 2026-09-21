@@ -23,6 +23,8 @@ import ConsultarPersonal from "./componentes/gestion-organizacion/personal/utils
 
 import ConsultarSuperLinea from "./componentes/gestion-producto/super-linea/consultar-super-linea";
 
+import ActualizacionMasivaForm from "./componentes/gestion-producto/precios/cambio-precios-masivo/util/actualizacion-masiva-form";
+
 function App() {
   return (
     <ThemeProvider>
@@ -51,6 +53,7 @@ function App() {
               <Route path="proveedor" element={<ConsultarProveedores />} />
               <Route path="personal" element={<ConsultarPersonal />} />
               <Route path="cambio-precios-masivo" element={<CambioPreciosMasivo />} />
+              <Route path="actualizacion-masiva" element={<ActualizacionMasivaForm />} />
               <Route path="lista-precios" element={<ListaPrecios />} />
               <Route path="localidad" element={<ConsultarLocalidad />} />
               <Route path="condicion-iva" element={<CondicionIva />} />     

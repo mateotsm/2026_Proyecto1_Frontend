@@ -1,6 +1,7 @@
 import { Producto } from "../../../../interfaces/gestion-producto/producto/interfaces-producto";
 import InformacionAuditoria from "../../../herramientas/reutilizables/informacion-auditoria";
 import RegistrarActualizarProductoForm from "../utils/registrar-actualizar-producto";
+import HistorialPrecios from "../componentes/historial-precios";
 
 interface Props {
   isAltaOpen: boolean;
@@ -77,7 +78,14 @@ export function ProductosModales({
           <InformacionAuditoria auditoria={auditoria} onClose={onCloseAuditoria} />
         </div>
       )}
-
+      
+      {mostrarHistorialPrecios && productoSeleccionado && (
+        <HistorialPrecios
+        productoId={productoSeleccionado.id}
+        denominacion={productoSeleccionado.denominacion}
+        onClose={onCloseHistorialPrecios}
+      />
+      )}
 
     </>
   );

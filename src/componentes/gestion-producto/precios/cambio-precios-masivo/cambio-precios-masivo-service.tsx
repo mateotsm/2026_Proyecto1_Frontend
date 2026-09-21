@@ -34,6 +34,27 @@ const CambioPreciosMasivoService = {
     }
   },
   
+  actualizarMasivo: async (payload: {
+      tipo: 'porcentaje' | 'monto';
+      valor: number;
+      alcance: 'linea' | 'global';
+      lineaId?: number;
+      motivo: string;
+    }) => {
+      try {
+        const token = localStorage.getItem('Token');
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        const { data } = await axios.post(
+          `${apiUrl}/producto/actualizar-precios-masivo`,
+          payload,
+          { headers }
+        );
+        return data;
+      } catch (error) {
+        throw error;
+    }
+  },
+  
 };
 
 export default CambioPreciosMasivoService;
